@@ -1,21 +1,15 @@
-MINIMARKET PEDIDOS V7
+MINIMARKET PEDIDOS V8 CORREGIDO
 
-Reemplace en GitHub:
-- index.html
-- manifest.json
-- sw.js
-- icon-192.png
-- icon-512.png
+Corrige el error JavaScript de la V7 que hacía que la interfaz cargara pero los botones no respondieran.
 
-Luego abra:
-https://verduraps.github.io/Pedidos/?app=v7
+Reemplazar en GitHub:
+index.html
+manifest.json
+sw.js
+icon-192.png
+icon-512.png
 
-Novedades:
-- Diseño oscuro parecido a la referencia.
-- Barra inferior Inicio / Proveedores / Historial / Configuración.
-- Planilla de pedido con buscador, Stock ref., botones - / + y cantidad.
-- Fecha específica del pedido.
-- Limpiar / Guardar / Guardar e imprimir.
-- Historial permanente local con número de pedido, fecha/hora y detalle exacto.
-- Pedidos pasados no se editan ni borran en modo empleado.
-- Cambiar proveedores/productos no modifica pedidos históricos.
+Abrir:
+https://verduraps.github.io/Pedidos/?app=v8
+
+El JavaScript fue validado con comprobación de sintaxis antes de crear este ZIP.

@@ -268,7 +268,7 @@ function buildOrder(pid){
         note:document.getElementById('orderNote')?.value||'',
         locked:true,items
       }
-    }const items=[];(p.products||[]).filter(x=>x.active!==false).forEach(pr=>{const qty=Number(document.getElementById('qty-'+pr.id)?.value)||0;const sv=document.getElementById('stock-'+pr.id)?.value;items.push({productId:pr.id,name:pr.name,unit:pr.unit||'unid.',stock:sv===''?null:Number(sv)||0,qty})});return{id:uid(),providerId:p.id,providerName:p.name,createdAt:new Date().toISOString(),visitDate:parseLocalDate(date).toISOString(),note:document.getElementById('orderNote').value||'',items}}
+}
 function saveOrder(pid,backTab){const o=buildOrder(pid);if(!o)return;db.orders.unshift(o);saveDB();showOrder(o.id,backTab)}
 function saveAndPrint(pid,backTab){const o=buildOrder(pid);if(!o)return;db.orders.unshift(o);saveDB();showOrder(o.id,backTab);setTimeout(()=>printRawBT(o.id),100)}
 function showOrder(id,backTab='history'){
@@ -290,43 +290,25 @@ function showOrder(id,backTab='history'){
    <div class="actions"><button class="primary" onclick="printRawBT('${o.id}')">🖨 Imprimir con RawBT</button><button class="ghost" onclick="printBrowser('${o.id}')">Impresión Android</button><button class="ghost" onclick="showTab('${backTab}')">Volver</button></div>
    <div class="historyLock">🔒 Este pedido está guardado como registro histórico. En modo empleado no se puede editar ni borrar.</div>
  </div>`
-}</div><div class="muted">Preparado: ${esc(new Date(o.createdAt).toLocaleString('es-PY'))}</div><div class="muted"><b>Para: ${esc(fmtDate(new Date(o.visitDate)))}</b></div></div><div class="card">${ordered.length?ordered.map(i=>`<div class="between productLine"><b>${esc(i.name)}</b><span>${esc(i.qty)} ${esc(i.unit)}</span></div>`).join(''):'<b>No se indicó ningún producto para pedir.</b>'}</div><div class="card"><div class="actions"><button class="primary" onclick="printRawBT('${o.id}')">Imprimir con RawBT</button><button class="ghost" onclick="printBrowser('${o.id}')">Impresión Android</button><button class="ghost" onclick="showTab('${backTab}')">Volver</button></div><div class="muted" style="margin-top:10px">Nada se imprime automáticamente. RawBT solo se abre después de confirmar.</div></div>`}
+}
 function receiptText(o){
-      const ordered=o.items.filter(i=>i.qty>0),totalUnits=ordered.reduce((s,i)=>s+(Number(i.qty)||0),0);
-      let t='MINIMARKET PEDIDOS
-PEDIDO A PROVEEDOR
-
-';
-      t+='Nro: '+(o.orderNumber||o.id)+'
-';
-      t+='Proveedor: '+o.providerName+'
-';
-      t+='Fecha del pedido: '+fmtDate(new Date(o.visitDate))+'
-';
-      t+='Preparado: '+new Date(o.createdAt).toLocaleString('es-PY')+'
-';
-      t+='--------------------------------
-';
-      ordered.forEach(i=>t+=i.name+'   '+i.qty+' '+i.unit+'
-');
-      if(!ordered.length)t+='SIN PRODUCTOS PARA PEDIR
-';
-      if(o.note)t+='--------------------------------
-Obs: '+o.note+'
-';
-      t+='--------------------------------
-';
-      t+='Total productos: '+ordered.length+'
-';
-      t+='Total unidades: '+totalUnits+'
-
-';
-      t+='REGISTRO GUARDADO EN HISTORIAL
-
-
-';
-      return t
-    }
+  const ordered=o.items.filter(i=>i.qty>0);
+  const totalUnits=ordered.reduce((s,i)=>s+(Number(i.qty)||0),0);
+  let t='MINIMARKET PEDIDOS\\nPEDIDO A PROVEEDOR\\n\\n';
+  t+='Nro: '+(o.orderNumber||o.id)+'\\n';
+  t+='Proveedor: '+o.providerName+'\\n';
+  t+='Fecha del pedido: '+fmtDate(new Date(o.visitDate))+'\\n';
+  t+='Preparado: '+new Date(o.createdAt).toLocaleString('es-PY')+'\\n';
+  t+='--------------------------------\\n';
+  ordered.forEach(i=>{t+=i.name+'   '+i.qty+' '+i.unit+'\\n'});
+  if(!ordered.length)t+='SIN PRODUCTOS PARA PEDIR\\n';
+  if(o.note)t+='--------------------------------\\nObs: '+o.note+'\\n';
+  t+='--------------------------------\\n';
+  t+='Total productos: '+ordered.length+'\\n';
+  t+='Total unidades: '+totalUnits+'\\n\\n';
+  t+='REGISTRO GUARDADO EN HISTORIAL\\n\\n\\n';
+  return t;
+}
 function utf8ToBase64(str){const bytes=new TextEncoder().encode(str);let bin='';bytes.forEach(b=>bin+=String.fromCharCode(b));return btoa(bin)}
 function printRawBT(id){const o=db.orders.find(x=>x.id===id);if(!o)return;if(!confirm('¿Imprimir este pedido con RawBT?'))return;window.location.href='rawbt:base64,'+utf8ToBase64(receiptText(o))}
 function printBrowser(id){const o=db.orders.find(x=>x.id===id);if(!o)return;const w=window.open('','_blank');w.document.write(`<pre style="font:16px monospace;white-space:pre-wrap">${esc(receiptText(o))}</pre><script>setTimeout(()=>window.print(),250)<\/script>`);w.document.close()}
@@ -339,7 +321,7 @@ function renderHistory(){
    h+=`<div class="card"><div class="between"><div><b style="font-size:19px">${esc(o.providerName)}</b><div class="muted">${esc(o.orderNumber||o.id)}</div><div class="muted">Fecha del pedido: ${esc(fmtDate(new Date(o.visitDate)))}</div><div class="muted">Preparado: ${esc(new Date(o.createdAt).toLocaleString('es-PY'))}</div></div><span class="badge">${count} ítems</span></div><div class="actions"><button class="ghost" onclick="showHistoryOrder('${o.id}')">Ver / Reimprimir</button></div></div>`
  });
  el.innerHTML=h
-}</b><div class="muted">Para: ${esc(fmtDate(new Date(o.visitDate)))}</div><div class="muted">Creado: ${esc(new Date(o.createdAt).toLocaleString('es-PY'))}</div></div><span class="badge">${o.items.filter(i=>i.qty>0).length} ítems</span></div><div class="actions"><button class="ghost" onclick="showHistoryOrder('${o.id}')">Ver / imprimir</button></div></div>`);el.innerHTML=h}
+}
 function showHistoryOrder(id){showTab('history');showOrder(id,'history')}
 function renderAdmin(){const el=document.getElementById('tab-admin');if(!admin){el.innerHTML='';return}let h=`<div class="sectionTitle">Configuración</div><div class="notice">Los pedidos guardados permanecen en Historial como respaldo. Proveedores y productos pueden editarse aquí sin alterar pedidos anteriores.</div><div class="card"><div class="actions"><button class="primary" onclick="providerForm()">+ Nuevo proveedor</button><button class="ghost" onclick="changePin()">Cambiar PIN</button></div></div>`;db.providers.forEach(p=>h+=`<div class="card"><div class="between"><div><b>${esc(p.name)}</b><div class="muted">${(p.days||[]).map(d=>DAYS[d]).join(', ')||'Sin días'}</div></div><span class="badge ${p.active===false?'danger':'ok'}">${p.active===false?'Inactivo':'Activo'}</span></div><div class="actions"><button class="ghost" onclick="providerForm('${p.id}')">Editar</button><button class="ghost" onclick="productsAdmin('${p.id}')">Productos</button><button class="warn" onclick="toggleProvider('${p.id}')">${p.active===false?'Activar':'Desactivar'}</button><button class="danger" onclick="deleteProvider('${p.id}')">Eliminar</button></div></div>`);el.innerHTML=h}
 function providerForm(id){const p=id?db.providers.find(x=>x.id===id):{id:uid(),name:'',phone:'',seller:'',days:[],notes:'',active:true,products:[]};document.getElementById('tab-admin').innerHTML=`<div class="sectionTitle">${id?'Editar':'Nuevo'} proveedor</div><div class="card"><label>Nombre</label><input id="pname" value="${esc(p.name)}"><label>Vendedor</label><input id="pseller" value="${esc(p.seller||'')}"><label>Teléfono</label><input id="pphone" value="${esc(p.phone||'')}"><label>Días de visita</label><div class="checks">${DAYS.map((d,i)=>`<label><input type="checkbox" class="pday" value="${i}" ${(p.days||[]).includes(i)?'checked':''}>${d}</label>`).join('')}</div><label>Observaciones</label><textarea id="pnotes" rows="2">${esc(p.notes||'')}</textarea><div class="actions"><button class="ok" onclick="saveProvider('${p.id}',${id?'true':'false'})">Guardar</button><button class="ghost" onclick="renderAdmin()">Cancelar</button></div></div>`}
@@ -363,7 +345,7 @@ renderAll();if('serviceWorker' in navigator&&location.protocol.startsWith('http'
     for(const reg of regs){ try{await reg.update()}catch(e){} }
     if('caches' in window){
       const keys=await caches.keys();
-      await Promise.all(keys.filter(k=>!k.includes('ui-v7')).map(k=>caches.delete(k)));
+      await Promise.all(keys.filter(k=>!k.includes('ui-v8')).map(k=>caches.delete(k)));
     }
   }catch(e){}
 })();
