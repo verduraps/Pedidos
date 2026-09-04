@@ -1,127 +1,115 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<meta name="theme-color" content="#1f2937" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#1f2937">
 <title>Minimarket Pedidos</title>
 <link rel="manifest" href="manifest.json">
 <style>
-:root{--bg:#f3f4f6;--card:#fff;--txt:#111827;--muted:#6b7280;--primary:#1f2937;--accent:#2563eb;--danger:#b91c1c;--ok:#15803d;--warn:#b45309;--line:#d1d5db}
-*{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--txt);font-size:16px}
-header{position:sticky;top:0;z-index:5;background:var(--primary);color:white;padding:14px 16px;font-size:20px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
-main{padding:12px;max-width:720px;margin:auto}.tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px}.tabs button{font-size:14px;padding:10px 4px}
-button{border:0;border-radius:9px;padding:11px 14px;font-size:16px;font-weight:700;background:#e5e7eb;color:#111827}.primary{background:var(--accent);color:white}.danger{background:var(--danger);color:white}.ok{background:var(--ok);color:white}.warn{background:var(--warn);color:white}.ghost{background:white;border:1px solid var(--line)}
-.card{background:var(--card);border-radius:12px;padding:14px;margin:10px 0;box-shadow:0 1px 4px #0001}.row{display:flex;gap:8px;align-items:center}.row>*{flex:1}.between{display:flex;justify-content:space-between;gap:8px;align-items:center}.muted{color:var(--muted);font-size:14px}.badge{display:inline-block;border-radius:999px;padding:4px 8px;font-size:12px;font-weight:700;background:#e5e7eb}.badge.ok{background:#dcfce7;color:#166534}.badge.warn{background:#fef3c7;color:#92400e}.badge.danger{background:#fee2e2;color:#991b1b}
-input,select,textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:8px;font-size:16px;background:white}label{display:block;font-weight:700;margin:10px 0 5px}.checks{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}.checks label{font-weight:400;margin:0;border:1px solid var(--line);padding:9px;border-radius:8px;background:white}.checks input{width:auto;margin-right:6px}
-.hidden{display:none!important}.sectionTitle{font-size:20px;font-weight:800;margin:12px 2px}.productLine{border-top:1px solid #eee;padding-top:10px;margin-top:10px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.actions button{flex:1;min-width:130px}.qty{max-width:105px}.big{font-size:24px;font-weight:800}.center{text-align:center}.notice{background:#eff6ff;border-left:4px solid #2563eb;padding:10px;border-radius:6px;margin:10px 0}.dangerbox{background:#fff1f2;border-left:4px solid #be123c;padding:10px;border-radius:6px;margin:10px 0}
-@media(max-width:480px){.tabs{grid-template-columns:1fr 1fr}.row.stack{display:block}.actions button{min-width:100%}}
+:root{--bg:#05070b;--card:#0d1420;--txt:#f7fbff;--silver:#d6dee8;--muted:#9badc1;--blue:#0a84ff;--green:#00b844;--line:#314154}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#05070b,#080c13 60%,#040608);color:var(--txt);min-height:100vh}
+header{position:sticky;top:0;z-index:5;background:linear-gradient(180deg,#0a1018,#080d14);padding:14px 16px;border-bottom:1px solid #263547;display:flex;justify-content:space-between;gap:8px;align-items:center;box-shadow:0 4px 18px #0008}
+header span{font-size:20px;font-weight:900;background:linear-gradient(180deg,#fff,#aeb8c5);-webkit-background-clip:text;background-clip:text;color:transparent}
+main{padding:12px;max-width:720px;margin:auto}.tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px}
+button{border:1px solid #3a4c61;border-radius:11px;padding:11px 14px;font-weight:800;font-size:16px;color:#f5f8fc;background:linear-gradient(180deg,#182332,#101823);box-shadow:inset 0 1px 0 #ffffff10,0 4px 12px #0005}
+button.primary,.primary{background:linear-gradient(180deg,#168fff,#005be8);border-color:#2aa0ff;color:white;box-shadow:0 0 14px #0a84ff66}
+button.ok,.ok{background:linear-gradient(180deg,#00cb4a,#009b35);border-color:#17dd5b;color:white}
+button.danger,.danger{background:linear-gradient(180deg,#e14b53,#a51b24);border-color:#ef6269;color:white}
+button.warn,.warn{background:linear-gradient(180deg,#e49b13,#aa6c00);border-color:#f0ad31;color:white}
+button.ghost,.ghost{background:linear-gradient(180deg,#172230,#101722);border:1px solid #3a4c61;color:#edf4fb}
+.card{background:linear-gradient(180deg,#111a28,#0a1019);border:1px solid var(--line);border-radius:14px;padding:14px;margin:10px 0;box-shadow:0 7px 22px #0007}
+.row{display:flex;gap:8px;align-items:center}.row>*{flex:1}.between{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.muted{color:var(--muted);font-size:14px}.sectionTitle{font-size:21px;font-weight:900;margin:14px 2px 10px;background:linear-gradient(180deg,#fff,#aab5c2);-webkit-background-clip:text;background-clip:text;color:transparent}
+.badge{display:inline-block;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:800;background:#1a2635;color:#e9f2ff;border:1px solid #40536a}.badge.ok{background:#07351c;color:#72ff9f;border-color:#0aa749}
+input,select,textarea{width:100%;padding:11px;border:1px solid #40536a;border-radius:9px;font-size:16px;background:#07101a;color:#f5f8fc;outline:none}
+input:focus,select:focus,textarea:focus{border-color:#0a84ff;box-shadow:0 0 0 2px #0a84ff33,0 0 12px #0a84ff66}
+label{display:block;font-weight:800;margin:10px 0 5px;color:#dce6f1}.checks{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}.checks label{font-weight:500;margin:0;border:1px solid #314154;padding:9px;border-radius:8px;background:#0c1420}.checks input{width:auto;margin-right:6px}
+.hidden{display:none!important}.productLine{border-top:1px solid #273649;padding-top:10px;margin-top:10px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.actions button{flex:1;min-width:130px}.qty{max-width:115px}.big{font-size:24px;font-weight:900}.center{text-align:center}
+.notice{background:#0a1624;border:1px solid #164a78;border-left:4px solid #0a84ff;color:#d8e9fb;padding:11px;border-radius:9px;margin:10px 0}.orderHead{background:#0b1723;border:1px solid #1f5875;border-left:4px solid #00a3ff;padding:11px;border-radius:9px}
+.productGrid{display:grid;grid-template-columns:minmax(0,1fr) 100px;gap:10px;align-items:center}.productGrid input{font-size:19px;font-weight:900;text-align:center}.clickable{cursor:pointer}.clickable:active{transform:scale(.995)}hr{border:0;border-top:1px solid #2b3c50}
+@media(max-width:480px){.tabs{grid-template-columns:1fr 1fr}.actions button{min-width:100%}.productGrid{grid-template-columns:minmax(0,1fr) 92px}header{font-size:18px}}
 </style>
 </head>
 <body>
-<header><span>Minimarket Pedidos</span><div style="display:flex;gap:6px;align-items:center"><button id="installBtn" class="ghost hidden" style="padding:7px 10px;font-size:13px">📲 Instalar</button><button id="adminBtn" class="ghost" style="padding:7px 10px;font-size:13px">Administrador</button></div></header>
+<header><span>🛒 Minimarket Pedidos</span><div style="display:flex;gap:6px;align-items:center"><button id="installBtn" class="ghost hidden" style="padding:7px 10px;font-size:13px">📲 Instalar</button><button id="adminBtn" class="ghost" style="padding:7px 10px;font-size:13px">⚙ Administrador</button></div></header>
 <main>
-  <div class="tabs">
-    <button data-tab="tomorrow" class="primary">Para mañana</button>
-    <button data-tab="providers">Proveedores</button>
-    <button data-tab="history">Historial</button>
-  </div>
-
-  <section id="tab-tomorrow"></section>
-  <section id="tab-providers" class="hidden"></section>
-  <section id="tab-history" class="hidden"></section>
-  <section id="tab-admin" class="hidden"></section>
+<div class="tabs"><button data-tab="upcoming" class="primary">Pedidos próximos</button><button data-tab="providers">Proveedores</button><button data-tab="history">Historial</button></div>
+<section id="tab-upcoming"></section><section id="tab-providers" class="hidden"></section><section id="tab-history" class="hidden"></section><section id="tab-admin" class="hidden"></section>
 </main>
 <script>
 const DAYS=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
-const DBKEY='minimarket_pedidos_v1';
-const PINKEY='minimarket_admin_pin_v1';
-let admin=false;
-let deferredPrompt=null;
-let db=loadDB();
-function loadDB(){try{return JSON.parse(localStorage.getItem(DBKEY))||{providers:[],orders:[]}}catch(e){return{providers:[],orders:[]}}}
+const DBKEY='minimarket_pedidos_v1', PINKEY='minimarket_admin_pin_v1';
+let admin=false,deferredPrompt=null,db=loadDB();
+function loadDB(){try{const d=JSON.parse(localStorage.getItem(DBKEY));return d&&d.providers?d:{providers:[],orders:[]}}catch(e){return{providers:[],orders:[]}}}
 function saveDB(){localStorage.setItem(DBKEY,JSON.stringify(db))}
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
 function esc(s=''){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-function tomorrow(){let d=new Date();d.setDate(d.getDate()+1);return d}
+function isoDate(d){const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');return `${y}-${m}-${day}`}
+function parseLocalDate(v){const [y,m,d]=v.split('-').map(Number);return new Date(y,m-1,d,12,0,0)}
 function fmtDate(d){return d.toLocaleDateString('es-PY',{weekday:'long',year:'numeric',month:'2-digit',day:'2-digit'})}
-function showTab(name){['tomorrow','providers','history','admin'].forEach(x=>document.getElementById('tab-'+x).classList.toggle('hidden',x!==name));document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('primary',b.dataset.tab===name));renderAll()}
+function nextVisitDate(p,from=new Date()){
+ const days=(p.days||[]).map(Number); if(!days.length){const d=new Date(from);d.setDate(d.getDate()+1);return d}
+ for(let offset=1;offset<=7;offset++){const d=new Date(from);d.setDate(d.getDate()+offset);if(days.includes(d.getDay()))return d}
+ const d=new Date(from);d.setDate(d.getDate()+1);return d
+}
+function showTab(name){['upcoming','providers','history','admin'].forEach(x=>document.getElementById('tab-'+x).classList.toggle('hidden',x!==name));document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('primary',b.dataset.tab===name));renderAll()}
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
+const installBtn=document.getElementById('installBtn');window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;installBtn.classList.remove('hidden')});installBtn.onclick=async()=>{if(!deferredPrompt){alert('Abrí el menú ⋮ de Chrome y elegí “Instalar aplicación” o “Agregar a pantalla principal”.');return}deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;installBtn.classList.add('hidden')};window.addEventListener('appinstalled',()=>installBtn.classList.add('hidden'));if(window.matchMedia('(display-mode:standalone)').matches)installBtn.classList.add('hidden');
+document.getElementById('adminBtn').onclick=()=>{if(admin){admin=false;alert('Modo administrador cerrado.');showTab('upcoming');return}const pin=prompt('PIN de administrador:');if(pin===null)return;const saved=localStorage.getItem(PINKEY)||'1234';if(pin===saved){admin=true;showTab('admin')}else alert('PIN incorrecto')};
 
-const installBtn=document.getElementById('installBtn');
-window.addEventListener('beforeinstallprompt',e=>{
- e.preventDefault();
- deferredPrompt=e;
- installBtn.classList.remove('hidden');
-});
-installBtn.addEventListener('click',async()=>{
- if(!deferredPrompt){
-  alert('Si Chrome no muestra la instalación automática, abrí el menú ⋮ y elegí “Instalar aplicación” o “Agregar a pantalla principal”.');
-  return;
- }
- deferredPrompt.prompt();
- await deferredPrompt.userChoice;
- deferredPrompt=null;
- installBtn.classList.add('hidden');
-});
-window.addEventListener('appinstalled',()=>{
- deferredPrompt=null;
- installBtn.classList.add('hidden');
-});
-if(window.matchMedia('(display-mode: standalone)').matches){installBtn.classList.add('hidden')}
-
-
-document.getElementById('adminBtn').onclick=()=>{
- if(admin){admin=false;alert('Modo administrador cerrado.');showTab('tomorrow');return}
- const pin=prompt('PIN de administrador:'); if(pin===null)return; const saved=localStorage.getItem(PINKEY)||'1234';
- if(pin===saved){admin=true;showTab('admin')} else alert('PIN incorrecto');
-};
-
-function renderTomorrow(){
- const el=document.getElementById('tab-tomorrow');const d=tomorrow();const day=d.getDay();const ps=db.providers.filter(p=>p.active!==false && (p.days||[]).includes(day));
- let h=`<div class="sectionTitle">Pedidos para mañana</div><div class="card"><div class="big">${esc(DAYS[day])}</div><div class="muted">${esc(fmtDate(d))}</div></div>`;
- if(!ps.length) h+=`<div class="card center"><b>No hay proveedores cargados para mañana.</b><div class="muted" style="margin-top:6px">Entrá en Administrador para cargar proveedores y días de visita.</div></div>`;
- ps.forEach(p=>{const active=(p.products||[]).filter(x=>x.active!==false);h+=`<div class="card"><div class="between"><div><div style="font-size:20px;font-weight:800">${esc(p.name)}</div><div class="muted">${active.length} productos para revisar</div></div><span class="badge">${esc(DAYS[day])}</span></div><div class="actions"><button class="primary" onclick="openOrder('${p.id}')">Preparar pedido</button></div></div>`});
- el.innerHTML=h;
+function renderUpcoming(){
+ const el=document.getElementById('tab-upcoming');let h='<div class="sectionTitle">Pedidos próximos</div><div class="notice"><b>Podés preparar un pedido cualquier día.</b><br>La fecha sugerida es la próxima visita habitual del proveedor, pero podés cambiarla antes de guardar.</div>';
+ const ps=db.providers.filter(p=>p.active!==false).map(p=>({p,date:nextVisitDate(p)})).sort((a,b)=>a.date-b.date);
+ if(!ps.length)h+='<div class="card center"><b>No hay proveedores activos cargados.</b></div>';
+ ps.forEach(({p,date})=>{const count=(p.products||[]).filter(x=>x.active!==false).length;h+=`<div class="card clickable" onclick="openOrder('${p.id}','${isoDate(date)}','upcoming')"><div class="between"><div><div style="font-size:20px;font-weight:800">${esc(p.name)}</div><div class="muted">Próxima visita: ${esc(fmtDate(date))}</div><div class="muted">${count} productos para revisar</div></div><span class="badge ok">Preparar</span></div></div>`});el.innerHTML=h
 }
-function openOrder(pid){
- const p=db.providers.find(x=>x.id===pid); if(!p)return; const products=(p.products||[]).filter(x=>x.active!==false);
- let h=`<div class="sectionTitle">Pedido — ${esc(p.name)}</div><div class="notice">Revisá cada producto. Si el stock está en el mínimo o por debajo, la app sugerirá la cantidad habitual de pedido.</div><div id="orderForm">`;
- products.forEach(pr=>h+=`<div class="card"><b>${esc(pr.name)}</b><div class="muted">Mínimo: ${esc(pr.minStock||0)} ${esc(pr.unit||'unid.')} · Pedido habitual: ${esc(pr.defaultOrder||0)}</div><div class="row stack productLine"><div><label>Stock actual</label><input class="qty" type="number" min="0" step="1" id="stock-${pr.id}" value="0" oninput="suggest('${pr.id}',${Number(pr.minStock)||0},${Number(pr.defaultOrder)||0})"></div><div><label>Cantidad a pedir</label><input class="qty" type="number" min="0" step="1" id="qty-${pr.id}" value="0"></div></div></div>`);
- h+=`</div><div class="card"><label>Observación del pedido</label><textarea id="orderNote" rows="2" placeholder="Opcional"></textarea><div class="actions"><button class="ok" onclick="saveOrder('${p.id}')">Guardar pedido</button><button class="ghost" onclick="renderTomorrow()">Cancelar</button></div></div>`;
- document.getElementById('tab-tomorrow').innerHTML=h;
+function renderProviders(){const el=document.getElementById('tab-providers');let h='<div class="sectionTitle">Proveedores</div><div class="notice">Tocá cualquier proveedor para preparar un pedido. No importa qué día sea hoy.</div>';if(!db.providers.length)h+='<div class="card">Todavía no hay proveedores cargados.</div>';db.providers.forEach(p=>{const next=nextVisitDate(p),active=(p.products||[]).filter(x=>x.active!==false).length;h+=`<div class="card ${p.active===false?'':'clickable'}" ${p.active===false?'':`onclick="openOrder('${p.id}','${isoDate(next)}','providers')"`}><div class="between"><div><b style="font-size:20px">${esc(p.name)}</b><div class="muted">Días: ${(p.days||[]).map(d=>DAYS[d]).join(', ')||'Sin días asignados'}</div><div class="muted">${active} productos activos</div></div><span class="badge ${p.active===false?'danger':'ok'}">${p.active===false?'Inactivo':'Abrir pedido'}</span></div></div>`});el.innerHTML=h}
+function openOrder(pid,dateValue,backTab='providers'){
+ const p=db.providers.find(x=>x.id===pid);if(!p)return;const products=(p.products||[]).filter(x=>x.active!==false);const target=dateValue||isoDate(nextVisitDate(p));
+ let h=`<div class="sectionTitle">Pedido — ${esc(p.name)}</div><div class="card orderHead"><label>Fecha para la cual se prepara el pedido</label><input type="date" id="orderDate" value="${target}"><div class="muted" style="margin-top:6px">Día(s) habitual(es): ${(p.days||[]).map(d=>DAYS[d]).join(', ')||'sin día asignado'}</div></div>`;
+ if(!products.length)h+='<div class="card"><b>Este proveedor no tiene productos activos cargados.</b></div>';
+ products.forEach(pr=>h+=`<div class="card"><div class="productGrid"><div><b style="font-size:18px">${esc(pr.name)}</b><div class="muted">Mínimo: ${esc(pr.minStock||0)} ${esc(pr.unit||'unid.')} · Habitual: ${esc(pr.defaultOrder||0)}</div></div><div><label style="margin-top:0;text-align:center">PEDIR</label><input type="number" inputmode="numeric" min="0" step="1" id="qty-${pr.id}" value="0"></div></div><details style="margin-top:8px"><summary class="muted">Usar stock actual para sugerir</summary><div class="row"><div><label>Stock actual</label><input type="number" inputmode="numeric" min="0" step="1" id="stock-${pr.id}" value=""></div><div style="padding-top:28px"><button class="ghost" style="width:100%" onclick="suggest('${pr.id}',${Number(pr.minStock)||0},${Number(pr.defaultOrder)||0})">Sugerir</button></div></div></details></div>`);
+ h+=`<div class="card"><label>Observación</label><textarea id="orderNote" rows="2" placeholder="Opcional"></textarea><div class="actions"><button class="ok" onclick="saveOrder('${p.id}','${backTab}')">Guardar pedido</button><button class="primary" onclick="saveAndPrint('${p.id}','${backTab}')">Guardar e imprimir</button><button class="ghost" onclick="showTab('${backTab}')">Cancelar</button></div></div>`;
+ document.getElementById('tab-'+backTab).innerHTML=h
 }
-function suggest(id,min,def){const s=Number(document.getElementById('stock-'+id).value)||0;document.getElementById('qty-'+id).value=s<=min?def:0}
-function saveOrder(pid){const p=db.providers.find(x=>x.id===pid);const items=[];(p.products||[]).filter(x=>x.active!==false).forEach(pr=>{const stock=Number(document.getElementById('stock-'+pr.id)?.value)||0;const qty=Number(document.getElementById('qty-'+pr.id)?.value)||0;items.push({productId:pr.id,name:pr.name,unit:pr.unit||'unid.',stock,qty})});const order={id:uid(),providerId:p.id,providerName:p.name,createdAt:new Date().toISOString(),visitDate:tomorrow().toISOString(),note:document.getElementById('orderNote').value||'',items};db.orders.unshift(order);saveDB();showOrder(order.id)}
-function showOrder(id){const o=db.orders.find(x=>x.id===id);if(!o)return;const ordered=o.items.filter(x=>x.qty>0);let h=`<div class="sectionTitle">Pedido guardado</div><div class="card"><div style="font-size:21px;font-weight:800">${esc(o.providerName)}</div><div class="muted">Preparado: ${esc(new Date(o.createdAt).toLocaleString('es-PY'))}</div><div class="muted">Visita: ${esc(new Date(o.visitDate).toLocaleDateString('es-PY'))}</div></div>`;
- h+=`<div class="card">${ordered.length?ordered.map(i=>`<div class="between productLine"><b>${esc(i.name)}</b><span>${esc(i.qty)} ${esc(i.unit)}</span></div>`).join(''):'<b>No se indicó ningún producto para pedir.</b>'}</div>`;
- h+=`<div class="card"><div class="actions"><button class="primary" onclick="printRawBT('${o.id}')">Imprimir con RawBT</button><button class="ghost" onclick="printBrowser('${o.id}')">Impresión Android</button><button class="ghost" onclick="showTab('tomorrow')">Volver</button></div><div class="muted" style="margin-top:10px">Nada se imprime automáticamente. La impresión ocurre solamente al pulsar uno de estos botones.</div></div>`;
- document.getElementById('tab-tomorrow').innerHTML=h;
-}
-function receiptText(o){const ordered=o.items.filter(x=>x.qty>0);let t='MINIMARKET\nPEDIDO A PROVEEDOR\n';t+='--------------------------------\n';t+='Proveedor: '+o.providerName+'\n';t+='Preparado: '+new Date(o.createdAt).toLocaleString('es-PY')+'\n';t+='Visita: '+new Date(o.visitDate).toLocaleDateString('es-PY')+'\n';t+='--------------------------------\n';ordered.forEach(i=>{t+=i.name+'\n  PEDIR: '+i.qty+' '+i.unit+'\n'});if(!ordered.length)t+='SIN PRODUCTOS PARA PEDIR\n';if(o.note)t+='--------------------------------\nObs: '+o.note+'\n';t+='--------------------------------\nTotal productos: '+ordered.length+'\n\n\n';return t}
+function suggest(id,min,def){const v=document.getElementById('stock-'+id).value;if(v==='')return alert('Ingresá primero el stock actual.');const s=Number(v)||0;document.getElementById('qty-'+id).value=s<=min?def:0}
+function buildOrder(pid){const p=db.providers.find(x=>x.id===pid),date=document.getElementById('orderDate').value;if(!date){alert('Elegí la fecha del pedido.');return null}const items=[];(p.products||[]).filter(x=>x.active!==false).forEach(pr=>{const qty=Number(document.getElementById('qty-'+pr.id)?.value)||0;const sv=document.getElementById('stock-'+pr.id)?.value;items.push({productId:pr.id,name:pr.name,unit:pr.unit||'unid.',stock:sv===''?null:Number(sv)||0,qty})});return{id:uid(),providerId:p.id,providerName:p.name,createdAt:new Date().toISOString(),visitDate:parseLocalDate(date).toISOString(),note:document.getElementById('orderNote').value||'',items}}
+function saveOrder(pid,backTab){const o=buildOrder(pid);if(!o)return;db.orders.unshift(o);saveDB();showOrder(o.id,backTab)}
+function saveAndPrint(pid,backTab){const o=buildOrder(pid);if(!o)return;db.orders.unshift(o);saveDB();showOrder(o.id,backTab);setTimeout(()=>printRawBT(o.id),100)}
+function showOrder(id,backTab='history'){const o=db.orders.find(x=>x.id===id);if(!o)return;const ordered=o.items.filter(x=>x.qty>0);const sec=document.getElementById('tab-'+backTab);sec.innerHTML=`<div class="sectionTitle">Pedido guardado</div><div class="card"><div style="font-size:21px;font-weight:800">${esc(o.providerName)}</div><div class="muted">Preparado: ${esc(new Date(o.createdAt).toLocaleString('es-PY'))}</div><div class="muted"><b>Para: ${esc(fmtDate(new Date(o.visitDate)))}</b></div></div><div class="card">${ordered.length?ordered.map(i=>`<div class="between productLine"><b>${esc(i.name)}</b><span>${esc(i.qty)} ${esc(i.unit)}</span></div>`).join(''):'<b>No se indicó ningún producto para pedir.</b>'}</div><div class="card"><div class="actions"><button class="primary" onclick="printRawBT('${o.id}')">Imprimir con RawBT</button><button class="ghost" onclick="printBrowser('${o.id}')">Impresión Android</button><button class="ghost" onclick="showTab('${backTab}')">Volver</button></div><div class="muted" style="margin-top:10px">Nada se imprime automáticamente. RawBT solo se abre después de confirmar.</div></div>`}
+function receiptText(o){const ordered=o.items.filter(i=>i.qty>0);let t='MINIMARKET\nPEDIDO A PROVEEDOR\n\nProveedor: '+o.providerName+'\nFecha del pedido: '+fmtDate(new Date(o.visitDate))+'\nPreparado: '+new Date(o.createdAt).toLocaleString('es-PY')+'\n--------------------------------\n';ordered.forEach(i=>t+=i.name+'   '+i.qty+' '+i.unit+'\n');if(!ordered.length)t+='SIN PRODUCTOS PARA PEDIR\n';if(o.note)t+='--------------------------------\nObs: '+o.note+'\n';t+='--------------------------------\nTotal productos: '+ordered.length+'\n\n\n';return t}
 function utf8ToBase64(str){const bytes=new TextEncoder().encode(str);let bin='';bytes.forEach(b=>bin+=String.fromCharCode(b));return btoa(bin)}
-function printRawBT(id){const o=db.orders.find(x=>x.id===id);if(!o)return;if(!confirm('¿Imprimir este pedido con RawBT?'))return;const raw=receiptText(o);const b64=utf8ToBase64(raw);window.location.href='rawbt:base64,'+b64}
+function printRawBT(id){const o=db.orders.find(x=>x.id===id);if(!o)return;if(!confirm('¿Imprimir este pedido con RawBT?'))return;window.location.href='rawbt:base64,'+utf8ToBase64(receiptText(o))}
 function printBrowser(id){const o=db.orders.find(x=>x.id===id);if(!o)return;const w=window.open('','_blank');w.document.write(`<pre style="font:16px monospace;white-space:pre-wrap">${esc(receiptText(o))}</pre><script>setTimeout(()=>window.print(),250)<\/script>`);w.document.close()}
-
-function renderProviders(){const el=document.getElementById('tab-providers');let h='<div class="sectionTitle">Proveedores</div>';if(!db.providers.length)h+='<div class="card">Todavía no hay proveedores cargados.</div>';db.providers.forEach(p=>h+=`<div class="card"><div class="between"><div><b>${esc(p.name)}</b><div class="muted">${(p.days||[]).map(d=>DAYS[d]).join(', ')||'Sin días asignados'}</div></div><span class="badge ${p.active===false?'danger':'ok'}">${p.active===false?'Inactivo':'Activo'}</span></div><div class="muted" style="margin-top:8px">${(p.products||[]).filter(x=>x.active!==false).length} productos activos</div></div>`);el.innerHTML=h}
-function renderHistory(){const el=document.getElementById('tab-history');let h='<div class="sectionTitle">Historial</div>';if(!db.orders.length)h+='<div class="card">Aún no hay pedidos guardados.</div>';db.orders.forEach(o=>h+=`<div class="card"><div class="between"><div><b>${esc(o.providerName)}</b><div class="muted">${esc(new Date(o.createdAt).toLocaleString('es-PY'))}</div></div><span class="badge">${o.items.filter(i=>i.qty>0).length} ítems</span></div><div class="actions"><button class="ghost" onclick="showHistoryOrder('${o.id}')">Ver / imprimir</button></div></div>`);el.innerHTML=h}
-function showHistoryOrder(id){showTab('history');const o=db.orders.find(x=>x.id===id);const ordered=o.items.filter(x=>x.qty>0);document.getElementById('tab-history').innerHTML=`<div class="sectionTitle">${esc(o.providerName)}</div><div class="card">${ordered.map(i=>`<div class="between productLine"><b>${esc(i.name)}</b><span>${esc(i.qty)} ${esc(i.unit)}</span></div>`).join('')||'Sin productos para pedir'}</div><div class="card"><div class="actions"><button class="primary" onclick="printRawBT('${o.id}')">Imprimir con RawBT</button><button class="ghost" onclick="renderHistory()">Volver</button></div></div>`}
-
-function renderAdmin(){const el=document.getElementById('tab-admin');if(!admin){el.innerHTML='';return}let h=`<div class="sectionTitle">Administración</div><div class="card"><div class="actions"><button class="primary" onclick="providerForm()">+ Nuevo proveedor</button><button class="ghost" onclick="changePin()">Cambiar PIN</button><button class="ghost" onclick="exportBackup()">Exportar copia local</button></div></div>`;db.providers.forEach(p=>h+=`<div class="card"><div class="between"><div><b>${esc(p.name)}</b><div class="muted">${(p.days||[]).map(d=>DAYS[d]).join(', ')||'Sin días'}</div></div><span class="badge ${p.active===false?'danger':'ok'}">${p.active===false?'Inactivo':'Activo'}</span></div><div class="actions"><button class="ghost" onclick="providerForm('${p.id}')">Editar</button><button class="ghost" onclick="productsAdmin('${p.id}')">Productos</button><button class="warn" onclick="toggleProvider('${p.id}')">${p.active===false?'Activar':'Desactivar'}</button><button class="danger" onclick="deleteProvider('${p.id}')">Eliminar</button></div></div>`);el.innerHTML=h}
+function renderHistory(){const el=document.getElementById('tab-history');let h='<div class="sectionTitle">Historial</div>';if(!db.orders.length)h+='<div class="card">Aún no hay pedidos guardados.</div>';db.orders.forEach(o=>h+=`<div class="card"><div class="between"><div><b>${esc(o.providerName)}</b><div class="muted">Para: ${esc(fmtDate(new Date(o.visitDate)))}</div><div class="muted">Creado: ${esc(new Date(o.createdAt).toLocaleString('es-PY'))}</div></div><span class="badge">${o.items.filter(i=>i.qty>0).length} ítems</span></div><div class="actions"><button class="ghost" onclick="showHistoryOrder('${o.id}')">Ver / imprimir</button></div></div>`);el.innerHTML=h}
+function showHistoryOrder(id){showTab('history');showOrder(id,'history')}
+function renderAdmin(){const el=document.getElementById('tab-admin');if(!admin){el.innerHTML='';return}let h=`<div class="sectionTitle">Administración</div><div class="card"><div class="actions"><button class="primary" onclick="providerForm()">+ Nuevo proveedor</button><button class="ghost" onclick="changePin()">Cambiar PIN</button></div></div>`;db.providers.forEach(p=>h+=`<div class="card"><div class="between"><div><b>${esc(p.name)}</b><div class="muted">${(p.days||[]).map(d=>DAYS[d]).join(', ')||'Sin días'}</div></div><span class="badge ${p.active===false?'danger':'ok'}">${p.active===false?'Inactivo':'Activo'}</span></div><div class="actions"><button class="ghost" onclick="providerForm('${p.id}')">Editar</button><button class="ghost" onclick="productsAdmin('${p.id}')">Productos</button><button class="warn" onclick="toggleProvider('${p.id}')">${p.active===false?'Activar':'Desactivar'}</button><button class="danger" onclick="deleteProvider('${p.id}')">Eliminar</button></div></div>`);el.innerHTML=h}
 function providerForm(id){const p=id?db.providers.find(x=>x.id===id):{id:uid(),name:'',phone:'',seller:'',days:[],notes:'',active:true,products:[]};document.getElementById('tab-admin').innerHTML=`<div class="sectionTitle">${id?'Editar':'Nuevo'} proveedor</div><div class="card"><label>Nombre</label><input id="pname" value="${esc(p.name)}"><label>Vendedor</label><input id="pseller" value="${esc(p.seller||'')}"><label>Teléfono</label><input id="pphone" value="${esc(p.phone||'')}"><label>Días de visita</label><div class="checks">${DAYS.map((d,i)=>`<label><input type="checkbox" class="pday" value="${i}" ${(p.days||[]).includes(i)?'checked':''}>${d}</label>`).join('')}</div><label>Observaciones</label><textarea id="pnotes" rows="2">${esc(p.notes||'')}</textarea><div class="actions"><button class="ok" onclick="saveProvider('${p.id}',${id?'true':'false'})">Guardar</button><button class="ghost" onclick="renderAdmin()">Cancelar</button></div></div>`}
 function saveProvider(id,exists){const name=document.getElementById('pname').value.trim();if(!name)return alert('Ingresá el nombre del proveedor.');const days=[...document.querySelectorAll('.pday:checked')].map(x=>Number(x.value));if(exists){const p=db.providers.find(x=>x.id===id);Object.assign(p,{name,seller:document.getElementById('pseller').value.trim(),phone:document.getElementById('pphone').value.trim(),days,notes:document.getElementById('pnotes').value.trim()})}else db.providers.push({id,name,seller:document.getElementById('pseller').value.trim(),phone:document.getElementById('pphone').value.trim(),days,notes:document.getElementById('pnotes').value.trim(),active:true,products:[]});saveDB();renderAdmin()}
-function productsAdmin(pid){const p=db.providers.find(x=>x.id===pid);let h=`<div class="sectionTitle">Productos — ${esc(p.name)}</div><div class="card"><button class="primary" onclick="productForm('${pid}')">+ Agregar producto</button></div>`;(p.products||[]).forEach(pr=>h+=`<div class="card"><div class="between"><div><b>${esc(pr.name)}</b><div class="muted">Mínimo ${esc(pr.minStock)} · Habitual ${esc(pr.defaultOrder)} · ${esc(pr.unit||'unid.')}</div></div><span class="badge ${pr.active===false?'danger':'ok'}">${pr.active===false?'Inactivo':'Activo'}</span></div><div class="actions"><button class="ghost" onclick="productForm('${pid}','${pr.id}')">Editar</button><button class="warn" onclick="toggleProduct('${pid}','${pr.id}')">${pr.active===false?'Activar':'Desactivar'}</button><button class="danger" onclick="deleteProduct('${pid}','${pr.id}')">Eliminar</button></div></div>`);h+=`<div class="card"><button class="ghost" onclick="renderAdmin()">← Volver a proveedores</button></div>`;document.getElementById('tab-admin').innerHTML=h}
-function productForm(pid,prid){const p=db.providers.find(x=>x.id===pid);const pr=prid?p.products.find(x=>x.id===prid):{id:uid(),name:'',minStock:0,defaultOrder:0,unit:'unid.',active:true};document.getElementById('tab-admin').innerHTML=`<div class="sectionTitle">${prid?'Editar':'Nuevo'} producto</div><div class="card"><label>Nombre del producto</label><input id="prname" value="${esc(pr.name)}"><div class="row"><div><label>Stock mínimo</label><input type="number" id="prmin" min="0" value="${esc(pr.minStock)}"></div><div><label>Pedido habitual</label><input type="number" id="prdef" min="0" value="${esc(pr.defaultOrder)}"></div></div><label>Unidad</label><select id="prunit"><option ${pr.unit==='unid.'?'selected':''}>unid.</option><option ${pr.unit==='caja'?'selected':''}>caja</option><option ${pr.unit==='pack'?'selected':''}>pack</option><option ${pr.unit==='kg'?'selected':''}>kg</option><option ${pr.unit==='docena'?'selected':''}>docena</option></select><div class="actions"><button class="ok" onclick="saveProduct('${pid}','${pr.id}',${prid?'true':'false'})">Guardar</button><button class="ghost" onclick="productsAdmin('${pid}')">Cancelar</button></div></div>`}
+function productsAdmin(pid){const p=db.providers.find(x=>x.id===pid);let h=`<div class="sectionTitle">Productos — ${esc(p.name)}</div><div class="card"><button class="primary" onclick="productForm('${pid}')">+ Agregar producto</button></div>`;(p.products||[]).forEach(pr=>h+=`<div class="card"><div class="between"><div><b>${esc(pr.name)}</b><div class="muted">Mínimo ${esc(pr.minStock)} · Habitual ${esc(pr.defaultOrder)} · ${esc(pr.unit||'unid.')}</div></div><span class="badge ${pr.active===false?'danger':'ok'}">${pr.active===false?'Inactivo':'Activo'}</span></div><div class="actions"><button class="ghost" onclick="productForm('${pid}','${pr.id}')">Editar</button><button class="warn" onclick="toggleProduct('${pid}','${pr.id}')">${pr.active===false?'Activar':'Desactivar'}</button><button class="danger" onclick="deleteProduct('${pid}','${pr.id}')">Eliminar</button></div></div>`);h+='<div class="card"><button class="ghost" onclick="renderAdmin()">← Volver a proveedores</button></div>';document.getElementById('tab-admin').innerHTML=h}
+function productForm(pid,prid){const p=db.providers.find(x=>x.id===pid),pr=prid?p.products.find(x=>x.id===prid):{id:uid(),name:'',minStock:0,defaultOrder:0,unit:'unid.',active:true};document.getElementById('tab-admin').innerHTML=`<div class="sectionTitle">${prid?'Editar':'Nuevo'} producto</div><div class="card"><label>Nombre del producto</label><input id="prname" value="${esc(pr.name)}"><div class="row"><div><label>Stock mínimo</label><input type="number" id="prmin" min="0" value="${esc(pr.minStock)}"></div><div><label>Pedido habitual</label><input type="number" id="prdef" min="0" value="${esc(pr.defaultOrder)}"></div></div><label>Unidad</label><select id="prunit"><option ${pr.unit==='unid.'?'selected':''}>unid.</option><option ${pr.unit==='caja'?'selected':''}>caja</option><option ${pr.unit==='pack'?'selected':''}>pack</option><option ${pr.unit==='kg'?'selected':''}>kg</option><option ${pr.unit==='docena'?'selected':''}>docena</option></select><div class="actions"><button class="ok" onclick="saveProduct('${pid}','${pr.id}',${prid?'true':'false'})">Guardar</button><button class="ghost" onclick="productsAdmin('${pid}')">Cancelar</button></div></div>`}
 function saveProduct(pid,prid,exists){const p=db.providers.find(x=>x.id===pid),name=document.getElementById('prname').value.trim();if(!name)return alert('Ingresá el nombre del producto.');const obj={id:prid,name,minStock:Number(document.getElementById('prmin').value)||0,defaultOrder:Number(document.getElementById('prdef').value)||0,unit:document.getElementById('prunit').value,active:true};if(exists){const old=p.products.find(x=>x.id===prid);obj.active=old.active!==false;Object.assign(old,obj)}else p.products.push(obj);saveDB();productsAdmin(pid)}
 function toggleProvider(id){const p=db.providers.find(x=>x.id===id);p.active=p.active===false?true:false;saveDB();renderAdmin()}
 function deleteProvider(id){const p=db.providers.find(x=>x.id===id);if(confirm(`¿Eliminar definitivamente ${p.name} y todos sus productos?\n\nSe recomienda DESACTIVAR en lugar de eliminar.`)){db.providers=db.providers.filter(x=>x.id!==id);saveDB();renderAdmin()}}
 function toggleProduct(pid,id){const p=db.providers.find(x=>x.id===pid),pr=p.products.find(x=>x.id===id);pr.active=pr.active===false?true:false;saveDB();productsAdmin(pid)}
 function deleteProduct(pid,id){const p=db.providers.find(x=>x.id===pid),pr=p.products.find(x=>x.id===id);if(confirm(`¿Eliminar definitivamente ${pr.name}?\n\nSe recomienda DESACTIVAR si querés conservar el historial.`)){p.products=p.products.filter(x=>x.id!==id);saveDB();productsAdmin(pid)}}
-function changePin(){const old=prompt('PIN actual:');const saved=localStorage.getItem(PINKEY)||'1234';if(old!==saved)return alert('PIN incorrecto');const n=prompt('Nuevo PIN (4 a 6 números):');if(!/^\d{4,6}$/.test(n||''))return alert('El PIN debe tener 4 a 6 números.');localStorage.setItem(PINKEY,n);alert('PIN cambiado.')}
-function exportBackup(){const blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='minimarket_pedidos_backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
-function renderAll(){renderTomorrow();renderProviders();renderHistory();renderAdmin()}
-renderAll();
-if('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('sw.js').catch(()=>{});
+function changePin(){const old=prompt('PIN actual:'),saved=localStorage.getItem(PINKEY)||'1234';if(old!==saved)return alert('PIN incorrecto');const n=prompt('Nuevo PIN (4 a 6 números):');if(!/^\d{4,6}$/.test(n||''))return alert('El PIN debe tener 4 a 6 números.');localStorage.setItem(PINKEY,n);alert('PIN cambiado.')}
+function renderAll(){renderUpcoming();renderProviders();renderHistory();renderAdmin()}
+renderAll();if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
-</body>
-</html>
+
+<script>
+(async()=>{
+  try{
+    const regs=await navigator.serviceWorker.getRegistrations();
+    for(const reg of regs){ try{await reg.update()}catch(e){} }
+    if('caches' in window){
+      const keys=await caches.keys();
+      await Promise.all(keys.filter(k=>!k.includes('dark-v6')).map(k=>caches.delete(k)));
+    }
+  }catch(e){}
+})();
+</script>
+
+</body></html>
