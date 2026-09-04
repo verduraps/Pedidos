@@ -1,7 +1,7 @@
 {
   "name": "Minimarket Pedidos",
   "short_name": "Pedidos",
-  "start_url": "./?app=v8",
+  "start_url": "./?app=v9",
   "scope": "./",
   "display": "standalone",
   "background_color": "#02060b",

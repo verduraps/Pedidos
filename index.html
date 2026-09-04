@@ -294,19 +294,32 @@ function showOrder(id,backTab='history'){
 function receiptText(o){
   const ordered=o.items.filter(i=>i.qty>0);
   const totalUnits=ordered.reduce((s,i)=>s+(Number(i.qty)||0),0);
-  let t='MINIMARKET PEDIDOS\\nPEDIDO A PROVEEDOR\\n\\n';
-  t+='Nro: '+(o.orderNumber||o.id)+'\\n';
-  t+='Proveedor: '+o.providerName+'\\n';
-  t+='Fecha del pedido: '+fmtDate(new Date(o.visitDate))+'\\n';
-  t+='Preparado: '+new Date(o.createdAt).toLocaleString('es-PY')+'\\n';
-  t+='--------------------------------\\n';
-  ordered.forEach(i=>{t+=i.name+'   '+i.qty+' '+i.unit+'\\n'});
-  if(!ordered.length)t+='SIN PRODUCTOS PARA PEDIR\\n';
-  if(o.note)t+='--------------------------------\\nObs: '+o.note+'\\n';
-  t+='--------------------------------\\n';
-  t+='Total productos: '+ordered.length+'\\n';
-  t+='Total unidades: '+totalUnits+'\\n\\n';
-  t+='REGISTRO GUARDADO EN HISTORIAL\\n\\n\\n';
+  const line='--------------------------------';
+  let t='      MINIMARKET PEDIDOS\n';
+  t+='       PEDIDO A PROVEEDOR\n\n';
+  t+='Nro: '+(o.orderNumber||o.id)+'\n';
+  t+='Proveedor: '+o.providerName+'\n';
+  t+='Fecha pedido: '+fmtDate(new Date(o.visitDate))+'\n';
+  t+='Preparado: '+new Date(o.createdAt).toLocaleString('es-PY')+'\n';
+  t+=line+'\n';
+  if(ordered.length){
+    ordered.forEach(i=>{
+      t+=i.name+'\n';
+      t+='Cantidad: '+i.qty+' '+i.unit+'\n';
+      t+=line+'\n';
+    });
+  }else{
+    t+='SIN PRODUCTOS PARA PEDIR\n';
+    t+=line+'\n';
+  }
+  if(o.note){
+    t+='Obs: '+o.note+'\n';
+    t+=line+'\n';
+  }
+  t+='Total productos: '+ordered.length+'\n';
+  t+='Total unidades: '+totalUnits+'\n\n';
+  t+='*** PEDIDO GUARDADO ***\n';
+  t+='*** EN HISTORIAL ***\n\n\n';
   return t;
 }
 function utf8ToBase64(str){const bytes=new TextEncoder().encode(str);let bin='';bytes.forEach(b=>bin+=String.fromCharCode(b));return btoa(bin)}
@@ -345,7 +358,7 @@ renderAll();if('serviceWorker' in navigator&&location.protocol.startsWith('http'
     for(const reg of regs){ try{await reg.update()}catch(e){} }
     if('caches' in window){
       const keys=await caches.keys();
-      await Promise.all(keys.filter(k=>!k.includes('ui-v8')).map(k=>caches.delete(k)));
+      await Promise.all(keys.filter(k=>!k.includes('ui-v9')).map(k=>caches.delete(k)));
     }
   }catch(e){}
 })();

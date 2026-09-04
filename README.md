@@ -1,6 +1,11 @@
-MINIMARKET PEDIDOS V8 CORREGIDO
+MINIMARKET PEDIDOS V9 - IMPRESIÓN CORREGIDA
 
-Corrige el error JavaScript de la V7 que hacía que la interfaz cargara pero los botones no respondieran.
+Corrige la impresión RawBT:
+- Ya no imprime los caracteres \n.
+- Usa saltos de línea reales.
+- Formato adaptado al papel angosto de la SUNMI.
+- Cada producto va en una línea y su cantidad debajo.
+- Mantiene fecha del pedido, número, proveedor y totales.
 
 Reemplazar en GitHub:
 index.html
@@ -9,7 +14,5 @@ sw.js
 icon-192.png
 icon-512.png
 
-Abrir:
-https://verduraps.github.io/Pedidos/?app=v8
-
-El JavaScript fue validado con comprobación de sintaxis antes de crear este ZIP.
+Luego abrir:
+https://verduraps.github.io/Pedidos/?app=v9
