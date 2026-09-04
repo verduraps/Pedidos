@@ -7,36 +7,175 @@
 <title>Minimarket Pedidos</title>
 <link rel="manifest" href="manifest.json">
 <style>
-:root{--bg:#05070b;--card:#0d1420;--txt:#f7fbff;--silver:#d6dee8;--muted:#9badc1;--blue:#0a84ff;--green:#00b844;--line:#314154}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#05070b,#080c13 60%,#040608);color:var(--txt);min-height:100vh}
-header{position:sticky;top:0;z-index:5;background:linear-gradient(180deg,#0a1018,#080d14);padding:14px 16px;border-bottom:1px solid #263547;display:flex;justify-content:space-between;gap:8px;align-items:center;box-shadow:0 4px 18px #0008}
-header span{font-size:20px;font-weight:900;background:linear-gradient(180deg,#fff,#aeb8c5);-webkit-background-clip:text;background-clip:text;color:transparent}
-main{padding:12px;max-width:720px;margin:auto}.tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px}
-button{border:1px solid #3a4c61;border-radius:11px;padding:11px 14px;font-weight:800;font-size:16px;color:#f5f8fc;background:linear-gradient(180deg,#182332,#101823);box-shadow:inset 0 1px 0 #ffffff10,0 4px 12px #0005}
-button.primary,.primary{background:linear-gradient(180deg,#168fff,#005be8);border-color:#2aa0ff;color:white;box-shadow:0 0 14px #0a84ff66}
-button.ok,.ok{background:linear-gradient(180deg,#00cb4a,#009b35);border-color:#17dd5b;color:white}
-button.danger,.danger{background:linear-gradient(180deg,#e14b53,#a51b24);border-color:#ef6269;color:white}
-button.warn,.warn{background:linear-gradient(180deg,#e49b13,#aa6c00);border-color:#f0ad31;color:white}
-button.ghost,.ghost{background:linear-gradient(180deg,#172230,#101722);border:1px solid #3a4c61;color:#edf4fb}
-.card{background:linear-gradient(180deg,#111a28,#0a1019);border:1px solid var(--line);border-radius:14px;padding:14px;margin:10px 0;box-shadow:0 7px 22px #0007}
-.row{display:flex;gap:8px;align-items:center}.row>*{flex:1}.between{display:flex;justify-content:space-between;gap:8px;align-items:center}
-.muted{color:var(--muted);font-size:14px}.sectionTitle{font-size:21px;font-weight:900;margin:14px 2px 10px;background:linear-gradient(180deg,#fff,#aab5c2);-webkit-background-clip:text;background-clip:text;color:transparent}
-.badge{display:inline-block;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:800;background:#1a2635;color:#e9f2ff;border:1px solid #40536a}.badge.ok{background:#07351c;color:#72ff9f;border-color:#0aa749}
-input,select,textarea{width:100%;padding:11px;border:1px solid #40536a;border-radius:9px;font-size:16px;background:#07101a;color:#f5f8fc;outline:none}
-input:focus,select:focus,textarea:focus{border-color:#0a84ff;box-shadow:0 0 0 2px #0a84ff33,0 0 12px #0a84ff66}
-label{display:block;font-weight:800;margin:10px 0 5px;color:#dce6f1}.checks{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}.checks label{font-weight:500;margin:0;border:1px solid #314154;padding:9px;border-radius:8px;background:#0c1420}.checks input{width:auto;margin-right:6px}
-.hidden{display:none!important}.productLine{border-top:1px solid #273649;padding-top:10px;margin-top:10px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.actions button{flex:1;min-width:130px}.qty{max-width:115px}.big{font-size:24px;font-weight:900}.center{text-align:center}
-.notice{background:#0a1624;border:1px solid #164a78;border-left:4px solid #0a84ff;color:#d8e9fb;padding:11px;border-radius:9px;margin:10px 0}.orderHead{background:#0b1723;border:1px solid #1f5875;border-left:4px solid #00a3ff;padding:11px;border-radius:9px}
-.productGrid{display:grid;grid-template-columns:minmax(0,1fr) 100px;gap:10px;align-items:center}.productGrid input{font-size:19px;font-weight:900;text-align:center}.clickable{cursor:pointer}.clickable:active{transform:scale(.995)}hr{border:0;border-top:1px solid #2b3c50}
-@media(max-width:480px){.tabs{grid-template-columns:1fr 1fr}.actions button{min-width:100%}.productGrid{grid-template-columns:minmax(0,1fr) 92px}header{font-size:18px}}
+:root{
+  --bg:#02060b;--bg2:#07101a;--panel:#0c1623;--panel2:#111d2d;
+  --white:#f8fbff;--silver:#c9d5e3;--muted:#8fa4bd;
+  --blue:#087dff;--blue2:#0064e8;--cyan:#00a9ff;--green:#00bf47;
+  --line:#34506d;--danger:#d84049;--warn:#d18a10
+}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{
+  margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--white);
+  background:radial-gradient(circle at 50% -5%,#0b1b2d 0,#050b12 32%,#02060b 75%);
+  font-size:16px
+}
+header{
+  position:sticky;top:0;z-index:20;
+  display:flex;justify-content:space-between;align-items:center;gap:8px;
+  padding:14px 13px 12px;background:linear-gradient(180deg,#050a10,#07101a);
+  border-bottom:1px solid #20354c;box-shadow:0 6px 20px #0008
+}
+.brandWrap{display:flex;align-items:center;gap:9px;min-width:0}
+.brandIcon{font-size:28px;filter:drop-shadow(0 0 8px #087dffaa)}
+.brandText{min-width:0}
+.brandTitle{
+  font-size:21px;font-weight:900;line-height:1;
+  background:linear-gradient(#fff,#aebdcd);-webkit-background-clip:text;background-clip:text;color:transparent
+}
+.brandSub{font-size:11px;color:#98add0;margin-top:4px}
+main{padding:12px 12px 92px;max-width:720px;margin:auto}
+.tabs{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:13px
+}
+button{
+  border:1px solid #35506e;border-radius:12px;padding:11px 12px;
+  font-size:15px;font-weight:800;color:#f5f9ff;
+  background:linear-gradient(180deg,#152236,#0b1421);
+  box-shadow:inset 0 1px 0 #ffffff12,0 4px 12px #0005
+}
+button:active{transform:translateY(1px)}
+.primary{
+  background:linear-gradient(180deg,#148cff,#005eeb);
+  border-color:#1f9cff;box-shadow:0 0 15px #087dff88,inset 0 1px 0 #ffffff33
+}
+.ok{background:linear-gradient(180deg,#00d14d,#009c36);border-color:#1ce462;box-shadow:0 0 13px #00bf4755}
+.danger{background:linear-gradient(180deg,#e34a52,#a51b23);border-color:#f16069}
+.warn{background:linear-gradient(180deg,#df9817,#9e6504);border-color:#f0ad33}
+.ghost{background:linear-gradient(180deg,#172438,#0c1522);border-color:#3c5775}
+.tabIcon{display:block;font-size:21px;margin-bottom:4px}
+.card{
+  background:linear-gradient(180deg,rgba(17,29,45,.98),rgba(8,16,26,.98));
+  border:1px solid #304967;border-radius:15px;padding:14px;margin:10px 0;
+  box-shadow:0 8px 24px #0008,inset 0 1px 0 #ffffff08
+}
+.sectionTitle{
+  font-size:22px;font-weight:900;margin:15px 2px 10px;
+  background:linear-gradient(#fff,#aebbc9);-webkit-background-clip:text;background-clip:text;color:transparent
+}
+.row{display:flex;gap:8px;align-items:center}.row>*{flex:1}
+.between{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.muted{color:var(--muted);font-size:13px}
+.badge{
+  display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:6px 11px;
+  font-size:12px;font-weight:900;background:#172538;color:#e9f3ff;border:1px solid #3c5877
+}
+.badge.ok{background:#06341a;color:#79ffa7;border-color:#00ae42;box-shadow:0 0 10px #00bf4733}
+.badge.warn{background:#3a2908;color:#ffd07b;border-color:#b97906}
+.badge.danger{background:#391015;color:#ff9da4;border-color:#a72e35}
+label{display:block;font-weight:800;color:#dbe7f4;margin:9px 0 5px}
+input,select,textarea{
+  width:100%;padding:11px 12px;border-radius:10px;border:1px solid #3a5777;
+  background:#040b12;color:white;font-size:16px;outline:none
+}
+input:focus,select:focus,textarea:focus{border-color:#0b8cff;box-shadow:0 0 0 2px #087dff33,0 0 12px #087dff66}
+input::placeholder,textarea::placeholder{color:#7289a5}
+.checks{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
+.checks label{font-weight:500;margin:0;padding:9px;border:1px solid #304967;border-radius:9px;background:#0b1420}
+.checks input{width:auto;margin-right:6px}
+.notice{background:#081624;border:1px solid #174f7d;border-left:4px solid #0a8cff;padding:11px;border-radius:10px;color:#d7eaff;margin:10px 0}
+.orderHead{padding:13px}
+.providerHero{display:flex;align-items:center;gap:10px;margin:12px 1px}
+.providerAvatar{
+  width:48px;height:48px;border-radius:50%;border:2px solid #4d6f98;display:flex;align-items:center;justify-content:center;
+  font-size:25px;background:#07101a
+}
+.providerMain{flex:1}
+.providerName{font-size:27px;font-weight:900;line-height:1.05}
+.orderDateRow{
+  display:grid;grid-template-columns:145px 1fr;gap:10px;align-items:center;
+  border:1px solid #304d6b;border-radius:13px;padding:10px;background:linear-gradient(180deg,#0d1b2b,#08131f)
+}
+.searchBox{position:relative;margin:12px 0}
+.searchBox input{padding-left:40px}
+.searchIcon{position:absolute;left:13px;top:10px;font-size:21px;color:#d7e8ff}
+.productHeader,.productRow{
+  display:grid;grid-template-columns:minmax(0,1fr) 82px 145px;gap:8px;align-items:center
+}
+.productHeader{padding:3px 10px;color:#dfe9f6;font-weight:900}
+.productRow{
+  border:1px solid #294766;border-radius:11px;padding:7px 8px;margin:6px 0;
+  background:linear-gradient(180deg,#0d1a29,#07111b)
+}
+.productName{font-size:16px;font-weight:800}
+.stockRef{text-align:center;color:#c3d3e6;font-weight:800}
+.qtyCtl{display:grid;grid-template-columns:38px 1fr 38px;gap:5px;align-items:center}
+.qtyCtl button{padding:8px 0;font-size:22px;line-height:1;border-radius:8px}
+.qtyCtl input{padding:8px 3px;text-align:center;font-size:18px;font-weight:900}
+.actionRow{display:grid;grid-template-columns:1fr 1.25fr 2.05fr;gap:8px;margin:16px 0}
+.actionRow button{min-height:54px}
+.historyLock{
+  margin-top:9px;padding:9px;border-radius:9px;background:#071724;border:1px solid #244f72;color:#bcd5ec;font-size:12px
+}
+.hidden{display:none!important}.clickable{cursor:pointer}.clickable:active{transform:scale(.995)}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.actions button{flex:1;min-width:125px}
+.productLine{border-top:1px solid #263c55;padding-top:9px;margin-top:9px}
+.center{text-align:center}.big{font-size:24px;font-weight:900}
+.bottomNav{
+  position:fixed;left:0;right:0;bottom:0;z-index:30;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  background:linear-gradient(180deg,#08131f,#050a10);
+  border-top:1px solid #284661;box-shadow:0 -5px 18px #0008;
+  padding:7px 5px max(7px,env(safe-area-inset-bottom))
+}
+.navItem{
+  border:0;background:transparent;box-shadow:none;border-radius:9px;padding:5px 2px;color:#b8c8da;
+  font-size:11px;font-weight:800
+}
+.navItem.active{color:#138dff;text-shadow:0 0 10px #087dffaa}
+.navSvg{display:block;width:24px;height:24px;margin:0 auto 3px;fill:currentColor}
+@media(max-width:480px){
+  .tabs button{padding:10px 4px;font-size:13px}
+  .productHeader,.productRow{grid-template-columns:minmax(0,1fr) 58px 120px}
+  .qtyCtl{grid-template-columns:34px 1fr 34px}
+  .orderDateRow{grid-template-columns:125px 1fr}
+  .actionRow{grid-template-columns:1fr 1fr}.actionRow button:last-child{grid-column:1/-1}
+  .providerName{font-size:24px}
+}
 </style>
 </head>
 <body>
-<header><span>🛒 Minimarket Pedidos</span><div style="display:flex;gap:6px;align-items:center"><button id="installBtn" class="ghost hidden" style="padding:7px 10px;font-size:13px">📲 Instalar</button><button id="adminBtn" class="ghost" style="padding:7px 10px;font-size:13px">⚙ Administrador</button></div></header>
+<header>
+  <div class="brandWrap">
+    <div class="brandIcon">🛒</div>
+    <div class="brandText">
+      <div class="brandTitle">Minimarket Pedidos</div>
+      <div class="brandSub">Tu negocio siempre organizado</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:6px;align-items:center">
+    <button id="installBtn" class="ghost hidden" style="padding:7px 9px;font-size:12px">📲 Instalar</button>
+    <button id="adminBtn" class="ghost" style="padding:8px 9px;font-size:12px">⚙ Administrador</button>
+  </div>
+</header>
 <main>
-<div class="tabs"><button data-tab="upcoming" class="primary">Pedidos próximos</button><button data-tab="providers">Proveedores</button><button data-tab="history">Historial</button></div>
+<div class="tabs"><button data-tab="upcoming" class="primary"><span class="tabIcon">▣</span>Pedidos próximos</button><button data-tab="providers"><span class="tabIcon">▰</span>Proveedores</button><button data-tab="history"><span class="tabIcon">◴</span>Historial</button></div>
 <section id="tab-upcoming"></section><section id="tab-providers" class="hidden"></section><section id="tab-history" class="hidden"></section><section id="tab-admin" class="hidden"></section>
 </main>
+<nav class="bottomNav">
+  <button class="navItem active" data-nav="upcoming" onclick="showTab('upcoming')">
+    <svg class="navSvg" viewBox="0 0 24 24"><path d="M12 3 2 11h3v10h6v-6h2v6h6V11h3L12 3z"/></svg>Inicio
+  </button>
+  <button class="navItem" data-nav="providers" onclick="showTab('providers')">
+    <svg class="navSvg" viewBox="0 0 24 24"><path d="M3 7h11v8H3V7zm12 3h3l3 3v2h-6v-5zM6 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm12 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>Proveedores
+  </button>
+  <button class="navItem" data-nav="history" onclick="showTab('history')">
+    <svg class="navSvg" viewBox="0 0 24 24"><path d="M6 2h12v20H6V2zm2 4h8V4H8v2zm0 4h8V8H8v2zm0 4h8v-2H8v2zm0 4h6v-2H8v2z"/></svg>Historial
+  </button>
+  <button class="navItem" data-nav="admin" onclick="openAdminNav()">
+    <svg class="navSvg" viewBox="0 0 24 24"><path d="m19.4 13 .1-1-.1-1 2-1.5-2-3.4-2.4 1a7 7 0 0 0-1.7-1L15 3.5h-4L10.7 6c-.6.3-1.2.6-1.7 1l-2.4-1-2 3.4 2 1.5-.1 1 .1 1-2 1.5 2 3.4 2.4-1c.5.4 1.1.7 1.7 1l.3 2.5h4l.3-2.5c.6-.3 1.2-.6 1.7-1l2.4 1 2-3.4-2-1.4zM13 15.5A3.5 3.5 0 1 1 13 8a3.5 3.5 0 0 1 0 7.5z"/></svg>Configuración
+  </button>
+</nav>
 <script>
 const DAYS=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
 const DBKEY='minimarket_pedidos_v1', PINKEY='minimarket_admin_pin_v1';
@@ -53,9 +192,20 @@ function nextVisitDate(p,from=new Date()){
  for(let offset=1;offset<=7;offset++){const d=new Date(from);d.setDate(d.getDate()+offset);if(days.includes(d.getDay()))return d}
  const d=new Date(from);d.setDate(d.getDate()+1);return d
 }
-function showTab(name){['upcoming','providers','history','admin'].forEach(x=>document.getElementById('tab-'+x).classList.toggle('hidden',x!==name));document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('primary',b.dataset.tab===name));renderAll()}
+function showTab(name){
+      ['upcoming','providers','history','admin'].forEach(x=>document.getElementById('tab-'+x).classList.toggle('hidden',x!==name));
+      document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('primary',b.dataset.tab===name));
+      document.querySelectorAll('.navItem').forEach(b=>b.classList.toggle('active',b.dataset.nav===name || (name==='admin'&&b.dataset.nav==='admin')));
+      renderAll()
+    }
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
 const installBtn=document.getElementById('installBtn');window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;installBtn.classList.remove('hidden')});installBtn.onclick=async()=>{if(!deferredPrompt){alert('Abrí el menú ⋮ de Chrome y elegí “Instalar aplicación” o “Agregar a pantalla principal”.');return}deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;installBtn.classList.add('hidden')};window.addEventListener('appinstalled',()=>installBtn.classList.add('hidden'));if(window.matchMedia('(display-mode:standalone)').matches)installBtn.classList.add('hidden');
+function openAdminNav(){
+  if(admin){showTab('admin');return}
+  const pin=prompt('PIN de administrador:');if(pin===null)return;
+  const saved=localStorage.getItem(PINKEY)||'1234';
+  if(pin===saved){admin=true;showTab('admin')}else alert('PIN incorrecto')
+}
 document.getElementById('adminBtn').onclick=()=>{if(admin){admin=false;alert('Modo administrador cerrado.');showTab('upcoming');return}const pin=prompt('PIN de administrador:');if(pin===null)return;const saved=localStorage.getItem(PINKEY)||'1234';if(pin===saved){admin=true;showTab('admin')}else alert('PIN incorrecto')};
 
 function renderUpcoming(){
@@ -66,25 +216,132 @@ function renderUpcoming(){
 }
 function renderProviders(){const el=document.getElementById('tab-providers');let h='<div class="sectionTitle">Proveedores</div><div class="notice">Tocá cualquier proveedor para preparar un pedido. No importa qué día sea hoy.</div>';if(!db.providers.length)h+='<div class="card">Todavía no hay proveedores cargados.</div>';db.providers.forEach(p=>{const next=nextVisitDate(p),active=(p.products||[]).filter(x=>x.active!==false).length;h+=`<div class="card ${p.active===false?'':'clickable'}" ${p.active===false?'':`onclick="openOrder('${p.id}','${isoDate(next)}','providers')"`}><div class="between"><div><b style="font-size:20px">${esc(p.name)}</b><div class="muted">Días: ${(p.days||[]).map(d=>DAYS[d]).join(', ')||'Sin días asignados'}</div><div class="muted">${active} productos activos</div></div><span class="badge ${p.active===false?'danger':'ok'}">${p.active===false?'Inactivo':'Abrir pedido'}</span></div></div>`});el.innerHTML=h}
 function openOrder(pid,dateValue,backTab='providers'){
- const p=db.providers.find(x=>x.id===pid);if(!p)return;const products=(p.products||[]).filter(x=>x.active!==false);const target=dateValue||isoDate(nextVisitDate(p));
- let h=`<div class="sectionTitle">Pedido — ${esc(p.name)}</div><div class="card orderHead"><label>Fecha para la cual se prepara el pedido</label><input type="date" id="orderDate" value="${target}"><div class="muted" style="margin-top:6px">Día(s) habitual(es): ${(p.days||[]).map(d=>DAYS[d]).join(', ')||'sin día asignado'}</div></div>`;
- if(!products.length)h+='<div class="card"><b>Este proveedor no tiene productos activos cargados.</b></div>';
- products.forEach(pr=>h+=`<div class="card"><div class="productGrid"><div><b style="font-size:18px">${esc(pr.name)}</b><div class="muted">Mínimo: ${esc(pr.minStock||0)} ${esc(pr.unit||'unid.')} · Habitual: ${esc(pr.defaultOrder||0)}</div></div><div><label style="margin-top:0;text-align:center">PEDIR</label><input type="number" inputmode="numeric" min="0" step="1" id="qty-${pr.id}" value="0"></div></div><details style="margin-top:8px"><summary class="muted">Usar stock actual para sugerir</summary><div class="row"><div><label>Stock actual</label><input type="number" inputmode="numeric" min="0" step="1" id="stock-${pr.id}" value=""></div><div style="padding-top:28px"><button class="ghost" style="width:100%" onclick="suggest('${pr.id}',${Number(pr.minStock)||0},${Number(pr.defaultOrder)||0})">Sugerir</button></div></div></details></div>`);
- h+=`<div class="card"><label>Observación</label><textarea id="orderNote" rows="2" placeholder="Opcional"></textarea><div class="actions"><button class="ok" onclick="saveOrder('${p.id}','${backTab}')">Guardar pedido</button><button class="primary" onclick="saveAndPrint('${p.id}','${backTab}')">Guardar e imprimir</button><button class="ghost" onclick="showTab('${backTab}')">Cancelar</button></div></div>`;
+ const p=db.providers.find(x=>x.id===pid);if(!p)return;
+ const products=(p.products||[]).filter(x=>x.active!==false);
+ const target=dateValue||isoDate(nextVisitDate(p));
+ let h=`<div class="providerHero">
+   <button class="ghost" style="flex:0 0 auto" onclick="showTab('${backTab}')">‹ Volver</button>
+   <div class="providerAvatar">👤</div>
+   <div class="providerMain"><div class="providerName">${esc(p.name)}</div><div class="muted">Día habitual: ${(p.days||[]).map(d=>DAYS[d]).join(', ')||'Sin día asignado'}</div></div>
+   <span class="badge ok">Activo</span>
+ </div>
+ <div class="orderDateRow"><b>▣ Fecha del pedido</b><input type="date" id="orderDate" value="${target}"></div>
+ <div class="searchBox"><span class="searchIcon">⌕</span><input id="productSearch" placeholder="Buscar producto..." oninput="filterOrderProducts()"></div>
+ <div class="productHeader"><div>Producto</div><div style="text-align:center">Stock ref.</div><div style="text-align:center">Pedir</div></div>
+ <div id="orderProducts">`;
+ if(!products.length) h+=`<div class="card center">Este proveedor no tiene productos activos cargados.</div>`;
+ products.forEach(pr=>h+=`<div class="productRow orderProduct" data-name="${esc(pr.name).toLowerCase()}">
+   <div><div class="productName">${esc(pr.name)}</div><div class="muted">${esc(pr.unit||'unid.')}</div></div>
+   <div class="stockRef">${esc(pr.minStock||0)}</div>
+   <div class="qtyCtl">
+     <button class="ghost" onclick="changeQty('${pr.id}',-1)">−</button>
+     <input type="number" inputmode="numeric" min="0" step="1" id="qty-${pr.id}" value="0">
+     <button class="primary" onclick="changeQty('${pr.id}',1)">+</button>
+   </div>
+ </div>`);
+ h+=`</div>
+ <div class="card"><label>Observación del pedido</label><textarea id="orderNote" rows="2" placeholder="Opcional"></textarea></div>
+ <div class="actionRow">
+   <button class="ghost" onclick="clearOrder('${p.id}')">🗑 Limpiar</button>
+   <button class="ghost" onclick="saveOrder('${p.id}','${backTab}')">▣ Guardar</button>
+   <button class="ok" onclick="saveAndPrint('${p.id}','${backTab}')">➤ Guardar e imprimir</button>
+ </div>`;
  document.getElementById('tab-'+backTab).innerHTML=h
 }
+function changeQty(id,delta){const el=document.getElementById('qty-'+id);if(!el)return;el.value=Math.max(0,(Number(el.value)||0)+delta)}
+function clearOrder(pid){const p=db.providers.find(x=>x.id===pid);(p.products||[]).forEach(pr=>{const e=document.getElementById('qty-'+pr.id);if(e)e.value=0});const n=document.getElementById('orderNote');if(n)n.value=''}
+function filterOrderProducts(){const q=(document.getElementById('productSearch')?.value||'').trim().toLowerCase();document.querySelectorAll('.orderProduct').forEach(el=>el.classList.toggle('hidden',q&&!el.dataset.name.includes(q)))}
+
 function suggest(id,min,def){const v=document.getElementById('stock-'+id).value;if(v==='')return alert('Ingresá primero el stock actual.');const s=Number(v)||0;document.getElementById('qty-'+id).value=s<=min?def:0}
-function buildOrder(pid){const p=db.providers.find(x=>x.id===pid),date=document.getElementById('orderDate').value;if(!date){alert('Elegí la fecha del pedido.');return null}const items=[];(p.products||[]).filter(x=>x.active!==false).forEach(pr=>{const qty=Number(document.getElementById('qty-'+pr.id)?.value)||0;const sv=document.getElementById('stock-'+pr.id)?.value;items.push({productId:pr.id,name:pr.name,unit:pr.unit||'unid.',stock:sv===''?null:Number(sv)||0,qty})});return{id:uid(),providerId:p.id,providerName:p.name,createdAt:new Date().toISOString(),visitDate:parseLocalDate(date).toISOString(),note:document.getElementById('orderNote').value||'',items}}
+function buildOrder(pid){
+      const p=db.providers.find(x=>x.id===pid),date=document.getElementById('orderDate').value;
+      if(!date){alert('Elegí la fecha del pedido.');return null}
+      const items=[];
+      (p.products||[]).filter(x=>x.active!==false).forEach(pr=>{
+        const qty=Number(document.getElementById('qty-'+pr.id)?.value)||0;
+        items.push({productId:pr.id,name:pr.name,unit:pr.unit||'unid.',minStock:Number(pr.minStock)||0,qty})
+      });
+      return{
+        id:uid(),orderNumber:'PED-'+Date.now().toString().slice(-8),
+        providerId:p.id,providerName:p.name,createdAt:new Date().toISOString(),
+        visitDate:parseLocalDate(date).toISOString(),
+        note:document.getElementById('orderNote')?.value||'',
+        locked:true,items
+      }
+    }const items=[];(p.products||[]).filter(x=>x.active!==false).forEach(pr=>{const qty=Number(document.getElementById('qty-'+pr.id)?.value)||0;const sv=document.getElementById('stock-'+pr.id)?.value;items.push({productId:pr.id,name:pr.name,unit:pr.unit||'unid.',stock:sv===''?null:Number(sv)||0,qty})});return{id:uid(),providerId:p.id,providerName:p.name,createdAt:new Date().toISOString(),visitDate:parseLocalDate(date).toISOString(),note:document.getElementById('orderNote').value||'',items}}
 function saveOrder(pid,backTab){const o=buildOrder(pid);if(!o)return;db.orders.unshift(o);saveDB();showOrder(o.id,backTab)}
 function saveAndPrint(pid,backTab){const o=buildOrder(pid);if(!o)return;db.orders.unshift(o);saveDB();showOrder(o.id,backTab);setTimeout(()=>printRawBT(o.id),100)}
-function showOrder(id,backTab='history'){const o=db.orders.find(x=>x.id===id);if(!o)return;const ordered=o.items.filter(x=>x.qty>0);const sec=document.getElementById('tab-'+backTab);sec.innerHTML=`<div class="sectionTitle">Pedido guardado</div><div class="card"><div style="font-size:21px;font-weight:800">${esc(o.providerName)}</div><div class="muted">Preparado: ${esc(new Date(o.createdAt).toLocaleString('es-PY'))}</div><div class="muted"><b>Para: ${esc(fmtDate(new Date(o.visitDate)))}</b></div></div><div class="card">${ordered.length?ordered.map(i=>`<div class="between productLine"><b>${esc(i.name)}</b><span>${esc(i.qty)} ${esc(i.unit)}</span></div>`).join(''):'<b>No se indicó ningún producto para pedir.</b>'}</div><div class="card"><div class="actions"><button class="primary" onclick="printRawBT('${o.id}')">Imprimir con RawBT</button><button class="ghost" onclick="printBrowser('${o.id}')">Impresión Android</button><button class="ghost" onclick="showTab('${backTab}')">Volver</button></div><div class="muted" style="margin-top:10px">Nada se imprime automáticamente. RawBT solo se abre después de confirmar.</div></div>`}
-function receiptText(o){const ordered=o.items.filter(i=>i.qty>0);let t='MINIMARKET\nPEDIDO A PROVEEDOR\n\nProveedor: '+o.providerName+'\nFecha del pedido: '+fmtDate(new Date(o.visitDate))+'\nPreparado: '+new Date(o.createdAt).toLocaleString('es-PY')+'\n--------------------------------\n';ordered.forEach(i=>t+=i.name+'   '+i.qty+' '+i.unit+'\n');if(!ordered.length)t+='SIN PRODUCTOS PARA PEDIR\n';if(o.note)t+='--------------------------------\nObs: '+o.note+'\n';t+='--------------------------------\nTotal productos: '+ordered.length+'\n\n\n';return t}
+function showOrder(id,backTab='history'){
+ const o=db.orders.find(x=>x.id===id);if(!o)return;
+ const ordered=o.items.filter(x=>x.qty>0);
+ const totalUnits=ordered.reduce((s,i)=>s+(Number(i.qty)||0),0);
+ const sec=document.getElementById('tab-'+backTab);
+ sec.innerHTML=`<div class="sectionTitle">Pedido guardado</div>
+ <div class="card">
+   <div class="between"><div><div style="font-size:23px;font-weight:900">${esc(o.providerName)}</div><div class="muted">${esc(o.orderNumber||o.id)}</div></div><span class="badge ok">Guardado</span></div>
+   <div class="muted" style="margin-top:8px">Preparado: ${esc(new Date(o.createdAt).toLocaleString('es-PY'))}</div>
+   <div style="margin-top:4px"><b>Fecha del pedido: ${esc(fmtDate(new Date(o.visitDate)))}</b></div>
+ </div>
+ <div class="card">${ordered.length?ordered.map(i=>`<div class="between productLine"><b>${esc(i.name)}</b><span>${esc(i.qty)} ${esc(i.unit)}</span></div>`).join(''):'<b>No se indicó ningún producto para pedir.</b>'}
+   <div class="productLine between"><b>Total de productos</b><b>${ordered.length}</b></div>
+   <div class="between" style="margin-top:7px"><b>Total de unidades</b><b>${totalUnits}</b></div>
+ </div>
+ <div class="card">
+   <div class="actions"><button class="primary" onclick="printRawBT('${o.id}')">🖨 Imprimir con RawBT</button><button class="ghost" onclick="printBrowser('${o.id}')">Impresión Android</button><button class="ghost" onclick="showTab('${backTab}')">Volver</button></div>
+   <div class="historyLock">🔒 Este pedido está guardado como registro histórico. En modo empleado no se puede editar ni borrar.</div>
+ </div>`
+}</div><div class="muted">Preparado: ${esc(new Date(o.createdAt).toLocaleString('es-PY'))}</div><div class="muted"><b>Para: ${esc(fmtDate(new Date(o.visitDate)))}</b></div></div><div class="card">${ordered.length?ordered.map(i=>`<div class="between productLine"><b>${esc(i.name)}</b><span>${esc(i.qty)} ${esc(i.unit)}</span></div>`).join(''):'<b>No se indicó ningún producto para pedir.</b>'}</div><div class="card"><div class="actions"><button class="primary" onclick="printRawBT('${o.id}')">Imprimir con RawBT</button><button class="ghost" onclick="printBrowser('${o.id}')">Impresión Android</button><button class="ghost" onclick="showTab('${backTab}')">Volver</button></div><div class="muted" style="margin-top:10px">Nada se imprime automáticamente. RawBT solo se abre después de confirmar.</div></div>`}
+function receiptText(o){
+      const ordered=o.items.filter(i=>i.qty>0),totalUnits=ordered.reduce((s,i)=>s+(Number(i.qty)||0),0);
+      let t='MINIMARKET PEDIDOS
+PEDIDO A PROVEEDOR
+
+';
+      t+='Nro: '+(o.orderNumber||o.id)+'
+';
+      t+='Proveedor: '+o.providerName+'
+';
+      t+='Fecha del pedido: '+fmtDate(new Date(o.visitDate))+'
+';
+      t+='Preparado: '+new Date(o.createdAt).toLocaleString('es-PY')+'
+';
+      t+='--------------------------------
+';
+      ordered.forEach(i=>t+=i.name+'   '+i.qty+' '+i.unit+'
+');
+      if(!ordered.length)t+='SIN PRODUCTOS PARA PEDIR
+';
+      if(o.note)t+='--------------------------------
+Obs: '+o.note+'
+';
+      t+='--------------------------------
+';
+      t+='Total productos: '+ordered.length+'
+';
+      t+='Total unidades: '+totalUnits+'
+
+';
+      t+='REGISTRO GUARDADO EN HISTORIAL
+
+
+';
+      return t
+    }
 function utf8ToBase64(str){const bytes=new TextEncoder().encode(str);let bin='';bytes.forEach(b=>bin+=String.fromCharCode(b));return btoa(bin)}
 function printRawBT(id){const o=db.orders.find(x=>x.id===id);if(!o)return;if(!confirm('¿Imprimir este pedido con RawBT?'))return;window.location.href='rawbt:base64,'+utf8ToBase64(receiptText(o))}
 function printBrowser(id){const o=db.orders.find(x=>x.id===id);if(!o)return;const w=window.open('','_blank');w.document.write(`<pre style="font:16px monospace;white-space:pre-wrap">${esc(receiptText(o))}</pre><script>setTimeout(()=>window.print(),250)<\/script>`);w.document.close()}
-function renderHistory(){const el=document.getElementById('tab-history');let h='<div class="sectionTitle">Historial</div>';if(!db.orders.length)h+='<div class="card">Aún no hay pedidos guardados.</div>';db.orders.forEach(o=>h+=`<div class="card"><div class="between"><div><b>${esc(o.providerName)}</b><div class="muted">Para: ${esc(fmtDate(new Date(o.visitDate)))}</div><div class="muted">Creado: ${esc(new Date(o.createdAt).toLocaleString('es-PY'))}</div></div><span class="badge">${o.items.filter(i=>i.qty>0).length} ítems</span></div><div class="actions"><button class="ghost" onclick="showHistoryOrder('${o.id}')">Ver / imprimir</button></div></div>`);el.innerHTML=h}
+function renderHistory(){
+ const el=document.getElementById('tab-history');
+ let h='<div class="sectionTitle">Historial de pedidos</div><div class="notice">Estos pedidos quedan guardados como respaldo de lo que realmente se solicitó al proveedor. No se pueden editar desde el modo empleado.</div>';
+ if(!db.orders.length)h+='<div class="card">Aún no hay pedidos guardados.</div>';
+ db.orders.forEach(o=>{
+   const count=o.items.filter(i=>i.qty>0).length;
+   h+=`<div class="card"><div class="between"><div><b style="font-size:19px">${esc(o.providerName)}</b><div class="muted">${esc(o.orderNumber||o.id)}</div><div class="muted">Fecha del pedido: ${esc(fmtDate(new Date(o.visitDate)))}</div><div class="muted">Preparado: ${esc(new Date(o.createdAt).toLocaleString('es-PY'))}</div></div><span class="badge">${count} ítems</span></div><div class="actions"><button class="ghost" onclick="showHistoryOrder('${o.id}')">Ver / Reimprimir</button></div></div>`
+ });
+ el.innerHTML=h
+}</b><div class="muted">Para: ${esc(fmtDate(new Date(o.visitDate)))}</div><div class="muted">Creado: ${esc(new Date(o.createdAt).toLocaleString('es-PY'))}</div></div><span class="badge">${o.items.filter(i=>i.qty>0).length} ítems</span></div><div class="actions"><button class="ghost" onclick="showHistoryOrder('${o.id}')">Ver / imprimir</button></div></div>`);el.innerHTML=h}
 function showHistoryOrder(id){showTab('history');showOrder(id,'history')}
-function renderAdmin(){const el=document.getElementById('tab-admin');if(!admin){el.innerHTML='';return}let h=`<div class="sectionTitle">Administración</div><div class="card"><div class="actions"><button class="primary" onclick="providerForm()">+ Nuevo proveedor</button><button class="ghost" onclick="changePin()">Cambiar PIN</button></div></div>`;db.providers.forEach(p=>h+=`<div class="card"><div class="between"><div><b>${esc(p.name)}</b><div class="muted">${(p.days||[]).map(d=>DAYS[d]).join(', ')||'Sin días'}</div></div><span class="badge ${p.active===false?'danger':'ok'}">${p.active===false?'Inactivo':'Activo'}</span></div><div class="actions"><button class="ghost" onclick="providerForm('${p.id}')">Editar</button><button class="ghost" onclick="productsAdmin('${p.id}')">Productos</button><button class="warn" onclick="toggleProvider('${p.id}')">${p.active===false?'Activar':'Desactivar'}</button><button class="danger" onclick="deleteProvider('${p.id}')">Eliminar</button></div></div>`);el.innerHTML=h}
+function renderAdmin(){const el=document.getElementById('tab-admin');if(!admin){el.innerHTML='';return}let h=`<div class="sectionTitle">Configuración</div><div class="notice">Los pedidos guardados permanecen en Historial como respaldo. Proveedores y productos pueden editarse aquí sin alterar pedidos anteriores.</div><div class="card"><div class="actions"><button class="primary" onclick="providerForm()">+ Nuevo proveedor</button><button class="ghost" onclick="changePin()">Cambiar PIN</button></div></div>`;db.providers.forEach(p=>h+=`<div class="card"><div class="between"><div><b>${esc(p.name)}</b><div class="muted">${(p.days||[]).map(d=>DAYS[d]).join(', ')||'Sin días'}</div></div><span class="badge ${p.active===false?'danger':'ok'}">${p.active===false?'Inactivo':'Activo'}</span></div><div class="actions"><button class="ghost" onclick="providerForm('${p.id}')">Editar</button><button class="ghost" onclick="productsAdmin('${p.id}')">Productos</button><button class="warn" onclick="toggleProvider('${p.id}')">${p.active===false?'Activar':'Desactivar'}</button><button class="danger" onclick="deleteProvider('${p.id}')">Eliminar</button></div></div>`);el.innerHTML=h}
 function providerForm(id){const p=id?db.providers.find(x=>x.id===id):{id:uid(),name:'',phone:'',seller:'',days:[],notes:'',active:true,products:[]};document.getElementById('tab-admin').innerHTML=`<div class="sectionTitle">${id?'Editar':'Nuevo'} proveedor</div><div class="card"><label>Nombre</label><input id="pname" value="${esc(p.name)}"><label>Vendedor</label><input id="pseller" value="${esc(p.seller||'')}"><label>Teléfono</label><input id="pphone" value="${esc(p.phone||'')}"><label>Días de visita</label><div class="checks">${DAYS.map((d,i)=>`<label><input type="checkbox" class="pday" value="${i}" ${(p.days||[]).includes(i)?'checked':''}>${d}</label>`).join('')}</div><label>Observaciones</label><textarea id="pnotes" rows="2">${esc(p.notes||'')}</textarea><div class="actions"><button class="ok" onclick="saveProvider('${p.id}',${id?'true':'false'})">Guardar</button><button class="ghost" onclick="renderAdmin()">Cancelar</button></div></div>`}
 function saveProvider(id,exists){const name=document.getElementById('pname').value.trim();if(!name)return alert('Ingresá el nombre del proveedor.');const days=[...document.querySelectorAll('.pday:checked')].map(x=>Number(x.value));if(exists){const p=db.providers.find(x=>x.id===id);Object.assign(p,{name,seller:document.getElementById('pseller').value.trim(),phone:document.getElementById('pphone').value.trim(),days,notes:document.getElementById('pnotes').value.trim()})}else db.providers.push({id,name,seller:document.getElementById('pseller').value.trim(),phone:document.getElementById('pphone').value.trim(),days,notes:document.getElementById('pnotes').value.trim(),active:true,products:[]});saveDB();renderAdmin()}
 function productsAdmin(pid){const p=db.providers.find(x=>x.id===pid);let h=`<div class="sectionTitle">Productos — ${esc(p.name)}</div><div class="card"><button class="primary" onclick="productForm('${pid}')">+ Agregar producto</button></div>`;(p.products||[]).forEach(pr=>h+=`<div class="card"><div class="between"><div><b>${esc(pr.name)}</b><div class="muted">Mínimo ${esc(pr.minStock)} · Habitual ${esc(pr.defaultOrder)} · ${esc(pr.unit||'unid.')}</div></div><span class="badge ${pr.active===false?'danger':'ok'}">${pr.active===false?'Inactivo':'Activo'}</span></div><div class="actions"><button class="ghost" onclick="productForm('${pid}','${pr.id}')">Editar</button><button class="warn" onclick="toggleProduct('${pid}','${pr.id}')">${pr.active===false?'Activar':'Desactivar'}</button><button class="danger" onclick="deleteProduct('${pid}','${pr.id}')">Eliminar</button></div></div>`);h+='<div class="card"><button class="ghost" onclick="renderAdmin()">← Volver a proveedores</button></div>';document.getElementById('tab-admin').innerHTML=h}
@@ -106,7 +363,7 @@ renderAll();if('serviceWorker' in navigator&&location.protocol.startsWith('http'
     for(const reg of regs){ try{await reg.update()}catch(e){} }
     if('caches' in window){
       const keys=await caches.keys();
-      await Promise.all(keys.filter(k=>!k.includes('dark-v6')).map(k=>caches.delete(k)));
+      await Promise.all(keys.filter(k=>!k.includes('ui-v7')).map(k=>caches.delete(k)));
     }
   }catch(e){}
 })();

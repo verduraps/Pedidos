@@ -1,13 +1,21 @@
-ACTUALIZACIÓN FORZADA V6
+MINIMARKET PEDIDOS V7
 
-Suba estos archivos a la raíz del repositorio y reemplace los existentes:
-index.html
-manifest.json
-sw.js
-icon-192.png
-icon-512.png
+Reemplace en GitHub:
+- index.html
+- manifest.json
+- sw.js
+- icon-192.png
+- icon-512.png
 
 Luego abra:
-https://verduraps.github.io/Pedidos/?app=v6
+https://verduraps.github.io/Pedidos/?app=v7
 
-Esta actualización NO borra localStorage, por lo que no debería borrar proveedores/productos cargados.
+Novedades:
+- Diseño oscuro parecido a la referencia.
+- Barra inferior Inicio / Proveedores / Historial / Configuración.
+- Planilla de pedido con buscador, Stock ref., botones - / + y cantidad.
+- Fecha específica del pedido.
+- Limpiar / Guardar / Guardar e imprimir.
+- Historial permanente local con número de pedido, fecha/hora y detalle exacto.
+- Pedidos pasados no se editan ni borran en modo empleado.
+- Cambiar proveedores/productos no modifica pedidos históricos.
